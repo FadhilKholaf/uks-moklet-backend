@@ -12,13 +12,20 @@ var loginValidate = [
     (0, express_validator_1.check)("password", "Password is required").notEmpty(),
     validateError_1.validateError,
 ];
+var siswaInputValidate = [
+    (0, express_validator_1.check)("email", "Email is required").isEmail().notEmpty(),
+    (0, express_validator_1.check)("password", "Password is required").notEmpty(),
+    (0, express_validator_1.check)("gender", "Gender is required").notEmpty(),
+    (0, express_validator_1.check)("rombel", "Rombel is required").notEmpty(),
+    validateError_1.validateError,
+];
 router.post("/login", loginValidate, login_controller_1.Login);
 router.get("/search", (0, auth_1.auth)("ALL"), siswa_controller_1.SearchSiswa);
 router.use((0, auth_1.auth)("ADMIN"));
 router.get("/", siswa_controller_1.GetAllSiswa);
-router.post("/", siswa_controller_1.CreateSiswa);
+router.post("/", siswaInputValidate, siswa_controller_1.CreateSiswa);
 router.get("/:id", siswa_controller_1.FindSiswaById);
-router.put("/:id", siswa_controller_1.UpdateSiswa);
+router.put("/:id", siswaInputValidate, siswa_controller_1.UpdateSiswa);
 router.delete("/:id", siswa_controller_1.DeleteSiswa);
 exports.default = router;
 //# sourceMappingURL=siswa.js.map

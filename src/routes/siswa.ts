@@ -19,14 +19,22 @@ var loginValidate = [
   check("password", "Password is required").notEmpty(),
   validateError,
 ];
+
+var siswaInputValidate = [
+  check("email", "Email is required").isEmail().notEmpty(),
+  check("password", "Password is required").notEmpty(),
+  check("gender", "Gender is required").notEmpty(),
+  check("rombel", "Rombel is required").notEmpty(),
+  validateError,
+];
 router.post("/login", loginValidate, Login);
 router.get("/search", auth("ALL"), SearchSiswa);
 
 router.use(auth("ADMIN"));
 router.get("/", GetAllSiswa);
-router.post("/", CreateSiswa);
+router.post("/", siswaInputValidate, CreateSiswa);
 router.get("/:id", FindSiswaById);
-router.put("/:id", UpdateSiswa);
+router.put("/:id", siswaInputValidate, UpdateSiswa);
 router.delete("/:id", DeleteSiswa);
 
 export default router;

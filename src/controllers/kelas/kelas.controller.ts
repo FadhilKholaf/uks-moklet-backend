@@ -4,6 +4,7 @@ import {
   updateKelas,
   deleteKelas,
   getAllKelas,
+  searchKelas,
 } from "@/utils/queries/kelas.query";
 import { Prisma } from "@prisma/client";
 import { Request, Response } from "express";
@@ -18,6 +19,21 @@ import { randomString } from "@/utils/func";
 interface KelasReqProps extends Request {
   body: Prisma.KelasUncheckedCreateInput;
 }
+
+export const SearchKelas = async (req: Request, res: Response) => {
+  try {
+    if (!req.query.name)
+      return res.status(400).json(BadRequest("Name is required"));
+    const response = await searchKelas(req.query.name.toString());
+
+    return res
+      .status(200)
+      .json(Success("Siswa loaded successfully", { data: response }));
+  } catch (error) {
+    console.log(error);
+    res.status(500).json(InternalServerError());
+  }
+};
 
 // FIND KELAS BY ID
 export const GetAllKelas = async (req: Request, res: Response) => {

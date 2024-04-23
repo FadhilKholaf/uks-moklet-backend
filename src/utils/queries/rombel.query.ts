@@ -1,6 +1,13 @@
 import prisma from "@/lib/prisma";
 import { Prisma } from "@prisma/client";
 
+export const connectSiswaToRombel = async (
+  data: Prisma.RombelSiswaUncheckedCreateInput
+) => {
+  const rombelSiswa = await prisma.rombelSiswa.create({ data });
+  return rombelSiswa;
+};
+
 // FIND ROMBEL BY ID
 export const findRombelById = async (id: string) => {
   const response = await prisma.rombel.findUnique({ where: { id } });

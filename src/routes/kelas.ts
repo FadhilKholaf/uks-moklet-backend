@@ -4,6 +4,7 @@ import {
   UpdateKelas,
   DeleteKelas,
   GetAllKelas,
+  SearchKelas,
 } from "@/controllers/kelas/kelas.controller";
 import { auth } from "@/middleware/auth";
 import { validateError } from "@/middleware/validateError";
@@ -18,6 +19,8 @@ var postKelasValidate = [
   check("tingkat", "tingkat is required").notEmpty(),
   validateError,
 ];
+
+router.get("/search", auth("ALL"), SearchKelas);
 
 // MAIN ROUTRER
 router.use(auth("ADMIN", "WALAS"));

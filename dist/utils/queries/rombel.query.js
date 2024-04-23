@@ -39,8 +39,20 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteRombel = exports.updateRombel = exports.createRombel = exports.getAllRombel = exports.findRombelById = void 0;
+exports.deleteRombel = exports.updateRombel = exports.createRombel = exports.getAllRombel = exports.findRombelById = exports.connectSiswaToRombel = void 0;
 var prisma_1 = __importDefault(require("@/lib/prisma"));
+var connectSiswaToRombel = function (data) { return __awaiter(void 0, void 0, void 0, function () {
+    var rombelSiswa;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, prisma_1.default.rombelSiswa.create({ data: data })];
+            case 1:
+                rombelSiswa = _a.sent();
+                return [2 /*return*/, rombelSiswa];
+        }
+    });
+}); };
+exports.connectSiswaToRombel = connectSiswaToRombel;
 // FIND ROMBEL BY ID
 var findRombelById = function (id) { return __awaiter(void 0, void 0, void 0, function () {
     var response;

@@ -46,11 +46,23 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var __rest = (this && this.__rest) || function (s, e) {
+    var t = {};
+    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
+        t[p] = s[p];
+    if (s != null && typeof Object.getOwnPropertySymbols === "function")
+        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+            if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
+                t[p[i]] = s[p[i]];
+        }
+    return t;
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.DeleteSiswa = exports.UpdateSiswa = exports.CreateSiswa = exports.FindSiswaById = exports.SearchSiswa = exports.GetAllSiswa = void 0;
 var siswa_query_1 = require("@/utils/queries/siswa.query");
 var apiResponse_1 = require("@/utils/apiResponse");
 var uuidv7_1 = require("uuidv7");
+var rombel_query_1 = require("@/utils/queries/rombel.query");
 // FIND SISWA BY ID
 var GetAllSiswa = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var response, error_1;
@@ -125,23 +137,29 @@ var FindSiswaById = function (req, res) { return __awaiter(void 0, void 0, void 
 exports.FindSiswaById = FindSiswaById;
 // CREATE NEW SISWA
 var CreateSiswa = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var data, response, error_4;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
+    var _a, rombel, siswa, data, response, rombelSiswa, error_4;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
             case 0:
-                _a.trys.push([0, 2, , 3]);
-                data = __assign(__assign({}, req.body), { id: (0, uuidv7_1.uuidv7)() });
+                _b.trys.push([0, 2, , 3]);
+                _a = req.body, rombel = _a.rombel, siswa = __rest(_a, ["rombel"]);
+                data = __assign(__assign({}, siswa), { id: (0, uuidv7_1.uuidv7)() });
                 return [4 /*yield*/, (0, siswa_query_1.createSiswa)(data)];
             case 1:
-                response = _a.sent();
+                response = _b.sent();
                 if (!response) {
                     return [2 /*return*/, res.status(500).json((0, apiResponse_1.InternalServerError)("Failed creating siswa"))];
                 }
+                rombelSiswa = {
+                    siswa_id: data.id,
+                    rombel_id: rombel,
+                };
+                (0, rombel_query_1.connectSiswaToRombel)(rombelSiswa);
                 return [2 /*return*/, res
                         .status(200)
                         .json((0, apiResponse_1.CreatedSuccessfully)("Siswa created successfully", { data: response }))];
             case 2:
-                error_4 = _a.sent();
+                error_4 = _b.sent();
                 console.log(error_4);
                 res.status(500).json((0, apiResponse_1.InternalServerError)());
                 return [3 /*break*/, 3];
@@ -152,20 +170,26 @@ var CreateSiswa = function (req, res) { return __awaiter(void 0, void 0, void 0,
 exports.CreateSiswa = CreateSiswa;
 // UPDATE EXISTING SISWA
 var UpdateSiswa = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var response, error_5;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
+    var _a, rombel, siswa, response, rombelSiswa, error_5;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
             case 0:
-                _a.trys.push([0, 2, , 3]);
-                return [4 /*yield*/, (0, siswa_query_1.updateSiswa)(req.params.id, req.body)];
+                _b.trys.push([0, 2, , 3]);
+                _a = req.body, rombel = _a.rombel, siswa = __rest(_a, ["rombel"]);
+                return [4 /*yield*/, (0, siswa_query_1.updateSiswa)(req.params.id, siswa)];
             case 1:
-                response = _a.sent();
+                response = _b.sent();
                 if (!response) {
                     return [2 /*return*/, res.status(400).json((0, apiResponse_1.BadRequest)("Failed updating siswa"))];
                 }
+                rombelSiswa = {
+                    siswa_id: req.params.id,
+                    rombel_id: rombel,
+                };
+                (0, rombel_query_1.connectSiswaToRombel)(rombelSiswa);
                 return [2 /*return*/, res.status(200).json((0, apiResponse_1.Success)("Siswa updated successfully"))];
             case 2:
-                error_5 = _a.sent();
+                error_5 = _b.sent();
                 console.log(error_5);
                 res.status(500).json((0, apiResponse_1.InternalServerError)());
                 return [3 /*break*/, 3];
