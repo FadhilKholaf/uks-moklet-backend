@@ -15,6 +15,7 @@ import {
   InternalServerError,
 } from "@/utils/apiResponse";
 import { uuidv7 } from "uuidv7";
+import { connectSiswaToRombel } from "@/utils/queries/rombel.query";
 
 interface siswaReqProps extends Request {
   body: Prisma.SiswaUncheckedCreateInput;
@@ -69,14 +70,20 @@ export const FindSiswaById = async (req: Request, res: Response) => {
 // CREATE NEW SISWA
 export const CreateSiswa = async (req: siswaReqProps, res: Response) => {
   try {
+    const { rombel, ...siswa } = req.body;
     const data: Prisma.SiswaUncheckedCreateInput = {
-      ...req.body,
+      ...siswa,
       id: uuidv7(),
     };
     const response = await createSiswa(data);
     if (!response) {
       return res.status(500).json(InternalServerError("Failed creating siswa"));
     }
+    const rombelSiswa: Prisma.RombelSiswaUncheckedCreateInput = {
+      siswa_id: data.id!,
+      rombel_id: rombel as string,
+    };
+    connectSiswaToRombel(rombelSiswa);
     return res
       .status(200)
       .json(
@@ -91,10 +98,16 @@ export const CreateSiswa = async (req: siswaReqProps, res: Response) => {
 // UPDATE EXISTING SISWA
 export const UpdateSiswa = async (req: siswaReqProps, res: Response) => {
   try {
-    const response = await updateSiswa(req.params.id, req.body);
+    const { rombel, ...siswa } = req.body;
+    const response = await updateSiswa(req.params.id, siswa);
     if (!response) {
       return res.status(400).json(BadRequest("Failed updating siswa"));
     }
+    const rombelSiswa: Prisma.RombelSiswaUncheckedCreateInput = {
+      siswa_id: req.params.id!,
+      rombel_id: rombel as string,
+    };
+    connectSiswaToRombel(rombelSiswa);
     return res.status(200).json(Success("Siswa updated successfully"));
   } catch (error) {
     console.log(error);
