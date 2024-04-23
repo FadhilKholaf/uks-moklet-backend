@@ -7,6 +7,14 @@ export const findKelasById = async (id: string) => {
   return response;
 };
 
+export async function searchKelas(query: string) {
+  const kelas = await prisma.kelas.findMany({
+    where: { nama_kelas: { contains: query } },
+    select: { tingkat: true, nama_kelas: true, rombel: true },
+  });
+  return kelas;
+}
+
 // CREATE NEW KELAS
 export const getAllKelas = async () => {
   const response = await prisma.kelas.findMany({
