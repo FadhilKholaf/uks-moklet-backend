@@ -39,7 +39,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteKelas = exports.updateKelas = exports.createKelas = exports.getAllKelas = exports.findKelasById = void 0;
+exports.deleteKelas = exports.updateKelas = exports.createKelas = exports.getAllKelas = exports.searchKelas = exports.findKelasById = void 0;
 var prisma_1 = __importDefault(require("@/lib/prisma"));
 // FIND KELAS BY ID
 var findKelasById = function (id) { return __awaiter(void 0, void 0, void 0, function () {
@@ -54,6 +54,23 @@ var findKelasById = function (id) { return __awaiter(void 0, void 0, void 0, fun
     });
 }); };
 exports.findKelasById = findKelasById;
+function searchKelas(query) {
+    return __awaiter(this, void 0, void 0, function () {
+        var kelas;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, prisma_1.default.kelas.findMany({
+                        where: { nama_kelas: { contains: query } },
+                        select: { tingkat: true, nama_kelas: true, rombel: true },
+                    })];
+                case 1:
+                    kelas = _a.sent();
+                    return [2 /*return*/, kelas];
+            }
+        });
+    });
+}
+exports.searchKelas = searchKelas;
 // CREATE NEW KELAS
 var getAllKelas = function () { return __awaiter(void 0, void 0, void 0, function () {
     var response;

@@ -47,12 +47,36 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.DeleteKelas = exports.UpdateKelas = exports.CreateKelas = exports.FindKelasById = exports.GetAllKelas = void 0;
+exports.DeleteKelas = exports.UpdateKelas = exports.CreateKelas = exports.FindKelasById = exports.GetAllKelas = exports.SearchKelas = void 0;
 var kelas_query_1 = require("@/utils/queries/kelas.query");
 var apiResponse_1 = require("@/utils/apiResponse");
+var SearchKelas = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var response, error_1;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                _a.trys.push([0, 2, , 3]);
+                if (!req.query.name)
+                    return [2 /*return*/, res.status(400).json((0, apiResponse_1.BadRequest)("Name is required"))];
+                return [4 /*yield*/, (0, kelas_query_1.searchKelas)(req.query.name.toString())];
+            case 1:
+                response = _a.sent();
+                return [2 /*return*/, res
+                        .status(200)
+                        .json((0, apiResponse_1.Success)("Siswa loaded successfully", { data: response }))];
+            case 2:
+                error_1 = _a.sent();
+                console.log(error_1);
+                res.status(500).json((0, apiResponse_1.InternalServerError)());
+                return [3 /*break*/, 3];
+            case 3: return [2 /*return*/];
+        }
+    });
+}); };
+exports.SearchKelas = SearchKelas;
 // FIND KELAS BY ID
 var GetAllKelas = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var response, error_1;
+    var response, error_2;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
@@ -67,8 +91,8 @@ var GetAllKelas = function (req, res) { return __awaiter(void 0, void 0, void 0,
                         .status(200)
                         .json((0, apiResponse_1.Success)("Kelas loaded successfully", { data: response }))];
             case 2:
-                error_1 = _a.sent();
-                console.log(error_1);
+                error_2 = _a.sent();
+                console.log(error_2);
                 res.status(500).json((0, apiResponse_1.InternalServerError)());
                 return [3 /*break*/, 3];
             case 3: return [2 /*return*/];
@@ -77,7 +101,7 @@ var GetAllKelas = function (req, res) { return __awaiter(void 0, void 0, void 0,
 }); };
 exports.GetAllKelas = GetAllKelas;
 var FindKelasById = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var response, error_2;
+    var response, error_3;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
@@ -92,8 +116,8 @@ var FindKelasById = function (req, res) { return __awaiter(void 0, void 0, void 
                         .status(200)
                         .json((0, apiResponse_1.Success)("Kelas loaded successfully", { data: response }))];
             case 2:
-                error_2 = _a.sent();
-                console.log(error_2);
+                error_3 = _a.sent();
+                console.log(error_3);
                 res.status(500).json((0, apiResponse_1.InternalServerError)());
                 return [3 /*break*/, 3];
             case 3: return [2 /*return*/];
@@ -103,7 +127,7 @@ var FindKelasById = function (req, res) { return __awaiter(void 0, void 0, void 
 exports.FindKelasById = FindKelasById;
 // CREATE NEW KELAS
 var CreateKelas = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var data, response, error_3;
+    var data, response, error_4;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
@@ -121,8 +145,8 @@ var CreateKelas = function (req, res) { return __awaiter(void 0, void 0, void 0,
                         .status(200)
                         .json((0, apiResponse_1.CreatedSuccessfully)("Kelas created successfully", { data: response }))];
             case 2:
-                error_3 = _a.sent();
-                console.log(error_3);
+                error_4 = _a.sent();
+                console.log(error_4);
                 res.status(500).json((0, apiResponse_1.InternalServerError)());
                 return [3 /*break*/, 3];
             case 3: return [2 /*return*/];
@@ -132,7 +156,7 @@ var CreateKelas = function (req, res) { return __awaiter(void 0, void 0, void 0,
 exports.CreateKelas = CreateKelas;
 // UPDATE EXISTING KELAS
 var UpdateKelas = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var response, error_4;
+    var response, error_5;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
@@ -145,8 +169,8 @@ var UpdateKelas = function (req, res) { return __awaiter(void 0, void 0, void 0,
                 }
                 return [2 /*return*/, res.status(200).json((0, apiResponse_1.Success)("Kelas updated successfully"))];
             case 2:
-                error_4 = _a.sent();
-                console.log(error_4);
+                error_5 = _a.sent();
+                console.log(error_5);
                 res.status(500).json((0, apiResponse_1.InternalServerError)());
                 return [3 /*break*/, 3];
             case 3: return [2 /*return*/];
@@ -156,7 +180,7 @@ var UpdateKelas = function (req, res) { return __awaiter(void 0, void 0, void 0,
 exports.UpdateKelas = UpdateKelas;
 // DELETE KELAS
 var DeleteKelas = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var response, error_5;
+    var response, error_6;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
@@ -169,8 +193,8 @@ var DeleteKelas = function (req, res) { return __awaiter(void 0, void 0, void 0,
                 }
                 return [2 /*return*/, res.status(200).json((0, apiResponse_1.Success)("Kelas deleted successfully"))];
             case 2:
-                error_5 = _a.sent();
-                console.log(error_5);
+                error_6 = _a.sent();
+                console.log(error_6);
                 res.status(500).json((0, apiResponse_1.InternalServerError)());
                 return [3 /*break*/, 3];
             case 3: return [2 /*return*/];

@@ -12,6 +12,7 @@ var postKelasValidate = [
     (0, express_validator_1.check)("tingkat", "tingkat is required").notEmpty(),
     validateError_1.validateError,
 ];
+router.get("/search", (0, auth_1.auth)("ALL"), kelas_controller_1.SearchKelas);
 // MAIN ROUTRER
 router.use((0, auth_1.auth)("ADMIN", "WALAS"));
 router.get("/", kelas_controller_1.GetAllKelas);
