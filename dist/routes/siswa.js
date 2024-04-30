@@ -14,7 +14,7 @@ var loginValidate = [
 ];
 var siswaInputValidate = [
     (0, express_validator_1.check)("email", "Email is required").isEmail().notEmpty(),
-    (0, express_validator_1.check)("password", "Password is required").notEmpty(),
+    (0, express_validator_1.check)("password", "Password is required").optional(),
     (0, express_validator_1.check)("gender", "Gender is required").notEmpty(),
     (0, express_validator_1.check)("rombel", "Rombel is required").notEmpty(),
     validateError_1.validateError,

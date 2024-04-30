@@ -22,7 +22,7 @@ var loginValidate = [
 
 var siswaInputValidate = [
   check("email", "Email is required").isEmail().notEmpty(),
-  check("password", "Password is required").notEmpty(),
+  check("password", "Password is required").optional(),
   check("gender", "Gender is required").notEmpty(),
   check("rombel", "Rombel is required").notEmpty(),
   validateError,
