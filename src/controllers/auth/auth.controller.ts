@@ -20,7 +20,7 @@ export const setSemester = async (req: Request, res: Response) => {
   };
 
   const newJwt = jwt.sign(token, process.env.JWT_SECRET, {
-    expiresIn: "15d",
+    // expiresIn: "15d",
   });
 
   res.cookie("token", newJwt, {
