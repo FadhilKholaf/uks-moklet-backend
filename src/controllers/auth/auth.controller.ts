@@ -19,9 +19,7 @@ export const setSemester = async (req: Request, res: Response) => {
     semester: semester.id,
   };
 
-  const newJwt = jwt.sign(token, process.env.JWT_SECRET, {
-    // expiresIn: "15d",
-  });
+  const newJwt = jwt.sign(token, process.env.JWT_SECRET);
 
   res.cookie("token", newJwt, {
     httpOnly: true,

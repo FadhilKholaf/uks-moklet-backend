@@ -72,9 +72,7 @@ var setSemester = function (req, res) { return __awaiter(void 0, void 0, void 0,
                 if (!semester)
                     return [2 /*return*/, res.json((0, apiResponse_1.BadRequest)("Invalid semester_id"))];
                 token = __assign(__assign({}, req.token), { semester: semester.id });
-                newJwt = jsonwebtoken_1.default.sign(token, process.env.JWT_SECRET, {
-                // expiresIn: "15d",
-                });
+                newJwt = jsonwebtoken_1.default.sign(token, process.env.JWT_SECRET);
                 res.cookie("token", newJwt, {
                     httpOnly: true,
                     maxAge: 15 * 24 * 60 * 60 * 1000, //expired dalam 15 hari
