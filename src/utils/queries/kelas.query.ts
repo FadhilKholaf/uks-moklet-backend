@@ -16,8 +16,9 @@ export async function searchKelas(query: string) {
 }
 
 // CREATE NEW KELAS
-export const getAllKelas = async () => {
+export const getAllKelas = async (where?: Prisma.KelasWhereInput) => {
   const response = await prisma.kelas.findMany({
+    where,
     include: { _count: { select: { rombel: true } } },
   });
   return response;

@@ -1,8 +1,9 @@
 import prisma from "@/lib/prisma";
 import { Prisma } from "@prisma/client";
 
-export async function getAllGuru() {
+export async function getAllGuru(where?: Prisma.GuruWhereInput) {
   const user = await prisma.guru.findMany({
+    where,
     select: { id: true, name: true, akses: true, email: true },
   });
   return user;

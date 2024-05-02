@@ -23,7 +23,7 @@ interface RombelReqProps extends Request {
 // FIND ROMBEL BY ID
 export const GetAllRombel = async (req: Request, res: Response) => {
   try {
-    const response = await getAllRombel();
+    const response = await getAllRombel({ semester_id: req.token?.semester });
     if (response == null) {
       return res.status(404).json(NotFound("Cannot find any rombel"));
     }

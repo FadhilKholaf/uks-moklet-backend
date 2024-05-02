@@ -28,8 +28,9 @@ export async function findRegisterById(id: string) {
   return response;
 }
 
-export async function getAllRegister() {
+export async function getAllRegister(where?: Prisma.RegisterWhereInput) {
   const response = await prisma.register.findMany({
+    where,
     include: {
       siswa: {
         select: {

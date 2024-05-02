@@ -8,7 +8,6 @@ import {
   UploadRombelSiswa,
   UploadSiswa,
 } from "@/controllers/bulk-upload/bulk-upload.controller";
-import { unlinkSync } from "fs";
 
 const router = Router();
 

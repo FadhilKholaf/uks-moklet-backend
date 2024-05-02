@@ -15,8 +15,9 @@ export const findRombelById = async (id: string) => {
 };
 
 // CREATE NEW ROMBEL
-export const getAllRombel = async () => {
+export const getAllRombel = async (where?: Prisma.RombelWhereInput) => {
   const response = await prisma.rombel.findMany({
+    where,
     include: {
       _count: { select: { siswa: true } },
       guru: { select: { name: true, id: true } },

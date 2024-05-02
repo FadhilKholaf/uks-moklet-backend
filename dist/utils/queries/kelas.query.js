@@ -72,11 +72,12 @@ function searchKelas(query) {
 }
 exports.searchKelas = searchKelas;
 // CREATE NEW KELAS
-var getAllKelas = function () { return __awaiter(void 0, void 0, void 0, function () {
+var getAllKelas = function (where) { return __awaiter(void 0, void 0, void 0, function () {
     var response;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0: return [4 /*yield*/, prisma_1.default.kelas.findMany({
+                    where: where,
                     include: { _count: { select: { rombel: true } } },
                 })];
             case 1:

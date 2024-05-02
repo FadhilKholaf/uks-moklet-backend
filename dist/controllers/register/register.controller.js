@@ -51,27 +51,43 @@ exports.DeleteRegister = exports.UpdateRegister = exports.CreateRegister = expor
 var register_query_1 = require("@/utils/queries/register/register.query");
 var apiResponse_1 = require("@/utils/apiResponse");
 var uuidv7_1 = require("uuidv7");
+var semester_query_1 = require("@/utils/queries/semester.query");
 var GetAllRegister = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var response, error_1;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
+    var semester, _a, response, error_1;
+    var _b;
+    return __generator(this, function (_c) {
+        switch (_c.label) {
             case 0:
-                _a.trys.push([0, 2, , 3]);
-                return [4 /*yield*/, (0, register_query_1.getAllRegister)()];
+                _c.trys.push([0, 5, , 6]);
+                if (!((_b = req.token) === null || _b === void 0 ? void 0 : _b.semester)) return [3 /*break*/, 2];
+                return [4 /*yield*/, (0, semester_query_1.findSemesterById)(req.token.semester)];
             case 1:
-                response = _a.sent();
+                _a = _c.sent();
+                return [3 /*break*/, 3];
+            case 2:
+                _a = undefined;
+                _c.label = 3;
+            case 3:
+                semester = _a;
+                return [4 /*yield*/, (0, register_query_1.getAllRegister)({
+                        tgl_periksa: semester
+                            ? { lte: semester.tgl_awal, gte: semester.tgl_akhir }
+                            : undefined,
+                    })];
+            case 4:
+                response = _c.sent();
                 if (response == null) {
                     return [2 /*return*/, res.status(404).json((0, apiResponse_1.NotFound)("Cannot find any register"))];
                 }
                 return [2 /*return*/, res
                         .status(200)
                         .json((0, apiResponse_1.Success)("Register loaded successfully", { data: response }))];
-            case 2:
-                error_1 = _a.sent();
+            case 5:
+                error_1 = _c.sent();
                 console.log(error_1);
                 res.status(500).json((0, apiResponse_1.InternalServerError)());
-                return [3 /*break*/, 3];
-            case 3: return [2 /*return*/];
+                return [3 /*break*/, 6];
+            case 6: return [2 /*return*/];
         }
     });
 }); };

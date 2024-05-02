@@ -41,12 +41,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteSiswa = exports.updateSiswa = exports.createSiswa = exports.findSiswaById = exports.findSiswaByEmail = exports.searchSiswa = exports.getAllSiswa = void 0;
 var prisma_1 = __importDefault(require("@/lib/prisma"));
-function getAllSiswa() {
+function getAllSiswa(where) {
     return __awaiter(this, void 0, void 0, function () {
         var user;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0: return [4 /*yield*/, prisma_1.default.siswa.findMany({
+                        where: where,
                         select: {
                             name: true,
                             id: true,

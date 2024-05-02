@@ -41,12 +41,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteGuru = exports.updateGuru = exports.createGuru = exports.findGuruById = exports.findGuruByEmail = exports.getAllGuru = void 0;
 var prisma_1 = __importDefault(require("@/lib/prisma"));
-function getAllGuru() {
+function getAllGuru(where) {
     return __awaiter(this, void 0, void 0, function () {
         var user;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0: return [4 /*yield*/, prisma_1.default.guru.findMany({
+                        where: where,
                         select: { id: true, name: true, akses: true, email: true },
                     })];
                 case 1:

@@ -7,8 +7,8 @@ export const findSemesterById = async (id: string) => {
   return response;
 };
 
-export const getAllSemester = async () => {
-  const response = await prisma.semester.findMany({});
+export const getAllSemester = async (where?: Prisma.SemesterWhereInput) => {
+  const response = await prisma.semester.findMany({ where });
   return response;
 };
 

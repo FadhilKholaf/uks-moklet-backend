@@ -38,7 +38,11 @@ export const SearchKelas = async (req: Request, res: Response) => {
 // FIND KELAS BY ID
 export const GetAllKelas = async (req: Request, res: Response) => {
   try {
-    const response = await getAllKelas();
+    const response = await getAllKelas({
+      rombel: req.token?.semester
+        ? { every: { semester_id: req.token?.semester } }
+        : undefined,
+    });
     if (response == null) {
       return res.status(400).json(BadRequest("Cannot find any kelas"));
     }

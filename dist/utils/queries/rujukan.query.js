@@ -42,11 +42,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteRujukan = exports.updateRujukan = exports.createRujukan = exports.findRujukanById = exports.getAllRujukan = void 0;
 var prisma_1 = __importDefault(require("@/lib/prisma"));
 // FIND TUJUKAN BY ID
-var getAllRujukan = function () { return __awaiter(void 0, void 0, void 0, function () {
+var getAllRujukan = function (where) { return __awaiter(void 0, void 0, void 0, function () {
     var response;
     return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0: return [4 /*yield*/, prisma_1.default.rujukan.findMany({})];
+            case 0: return [4 /*yield*/, prisma_1.default.rujukan.findMany({ where: where })];
             case 1:
                 response = _a.sent();
                 return [2 /*return*/, response];

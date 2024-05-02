@@ -1,7 +1,15 @@
 import { Request, Response, NextFunction } from "express";
 import { RequestWithSession, Token } from "@/types/middleware";
 import jwt from "jsonwebtoken";
-import { InternalServerError, Unauthorize } from "@/utils/apiResponse";
+import { Unauthorize } from "@/utils/apiResponse";
+
+declare global {
+  namespace Express {
+    interface Request {
+      token?: Token;
+    }
+  }
+}
 
 export const auth =
   (...akses: ("SISWA" | "ADMIN" | "WALAS" | "ALL")[]) =>

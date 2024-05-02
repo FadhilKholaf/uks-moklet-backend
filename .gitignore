@@ -2,3 +2,7 @@ node_modules/
 # dist/
 *.env.*
 .env
+
+# misc
+.DS_Store
+*.pem

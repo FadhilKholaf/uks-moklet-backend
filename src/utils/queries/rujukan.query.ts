@@ -2,8 +2,8 @@ import prisma from "@/lib/prisma";
 import { Prisma } from "@prisma/client";
 
 // FIND TUJUKAN BY ID
-export const getAllRujukan = async () => {
-  const response = await prisma.rujukan.findMany({});
+export const getAllRujukan = async (where?: Prisma.RujukanWhereInput) => {
+  const response = await prisma.rujukan.findMany({ where });
   return response;
 };
 

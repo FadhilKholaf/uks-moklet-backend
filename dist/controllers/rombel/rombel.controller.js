@@ -54,13 +54,14 @@ var rombel_query_1 = require("@/utils/queries/rombel.query");
 // FIND ROMBEL BY ID
 var GetAllRombel = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var response, error_1;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
+    var _a;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
             case 0:
-                _a.trys.push([0, 2, , 3]);
-                return [4 /*yield*/, (0, rombel_query_1.getAllRombel)()];
+                _b.trys.push([0, 2, , 3]);
+                return [4 /*yield*/, (0, rombel_query_1.getAllRombel)({ semester_id: (_a = req.token) === null || _a === void 0 ? void 0 : _a.semester })];
             case 1:
-                response = _a.sent();
+                response = _b.sent();
                 if (response == null) {
                     return [2 /*return*/, res.status(404).json((0, apiResponse_1.NotFound)("Cannot find any rombel"))];
                 }
@@ -68,7 +69,7 @@ var GetAllRombel = function (req, res) { return __awaiter(void 0, void 0, void 0
                         .status(200)
                         .json((0, apiResponse_1.Success)("Rombel loaded successfully", { data: response }))];
             case 2:
-                error_1 = _a.sent();
+                error_1 = _b.sent();
                 console.log(error_1);
                 res.status(500).json((0, apiResponse_1.InternalServerError)());
                 return [3 /*break*/, 3];

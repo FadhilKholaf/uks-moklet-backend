@@ -77,13 +77,18 @@ exports.SearchKelas = SearchKelas;
 // FIND KELAS BY ID
 var GetAllKelas = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var response, error_2;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
+    var _a, _b;
+    return __generator(this, function (_c) {
+        switch (_c.label) {
             case 0:
-                _a.trys.push([0, 2, , 3]);
-                return [4 /*yield*/, (0, kelas_query_1.getAllKelas)()];
+                _c.trys.push([0, 2, , 3]);
+                return [4 /*yield*/, (0, kelas_query_1.getAllKelas)({
+                        rombel: ((_a = req.token) === null || _a === void 0 ? void 0 : _a.semester)
+                            ? { every: { semester_id: (_b = req.token) === null || _b === void 0 ? void 0 : _b.semester } }
+                            : undefined,
+                    })];
             case 1:
-                response = _a.sent();
+                response = _c.sent();
                 if (response == null) {
                     return [2 /*return*/, res.status(400).json((0, apiResponse_1.BadRequest)("Cannot find any kelas"))];
                 }
@@ -91,7 +96,7 @@ var GetAllKelas = function (req, res) { return __awaiter(void 0, void 0, void 0,
                         .status(200)
                         .json((0, apiResponse_1.Success)("Kelas loaded successfully", { data: response }))];
             case 2:
-                error_2 = _a.sent();
+                error_2 = _c.sent();
                 console.log(error_2);
                 res.status(500).json((0, apiResponse_1.InternalServerError)());
                 return [3 /*break*/, 3];

@@ -67,11 +67,12 @@ var findRombelById = function (id) { return __awaiter(void 0, void 0, void 0, fu
 }); };
 exports.findRombelById = findRombelById;
 // CREATE NEW ROMBEL
-var getAllRombel = function () { return __awaiter(void 0, void 0, void 0, function () {
+var getAllRombel = function (where) { return __awaiter(void 0, void 0, void 0, function () {
     var response;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0: return [4 /*yield*/, prisma_1.default.rombel.findMany({
+                    where: where,
                     include: {
                         _count: { select: { siswa: true } },
                         guru: { select: { name: true, id: true } },

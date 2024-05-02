@@ -76,12 +76,13 @@ function findRegisterById(id) {
     });
 }
 exports.findRegisterById = findRegisterById;
-function getAllRegister() {
+function getAllRegister(where) {
     return __awaiter(this, void 0, void 0, function () {
         var response;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0: return [4 /*yield*/, prisma_1.default.register.findMany({
+                        where: where,
                         include: {
                             siswa: {
                                 select: {

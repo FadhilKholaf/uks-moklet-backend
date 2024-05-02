@@ -17,6 +17,7 @@ import { uuidv7 } from "uuidv7";
 import { registerWithDetail } from "@/types/prismaRelation";
 import { Prisma } from "@prisma/client";
 import { stringify } from "querystring";
+import { findSemesterById } from "@/utils/queries/semester.query";
 
 interface RegisterReqProps extends Request {
   body: Prisma.RegisterUncheckedCreateInput;
@@ -24,10 +25,19 @@ interface RegisterReqProps extends Request {
 
 export const GetAllRegister = async (req: Request, res: Response) => {
   try {
-    const response = await getAllRegister();
+    const semester = req.token?.semester
+      ? await findSemesterById(req.token.semester)
+      : undefined;
+    const response = await getAllRegister({
+      tgl_periksa: semester
+        ? { lte: semester.tgl_awal, gte: semester.tgl_akhir }
+        : undefined,
+    });
+
     if (response == null) {
       return res.status(404).json(NotFound("Cannot find any register"));
     }
+
     return res
       .status(200)
       .json(Success("Register loaded successfully", { data: response }));

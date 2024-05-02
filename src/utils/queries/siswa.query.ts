@@ -1,8 +1,9 @@
 import prisma from "@/lib/prisma";
 import { Prisma } from "@prisma/client";
 
-export async function getAllSiswa() {
+export async function getAllSiswa(where?: Prisma.SiswaWhereInput) {
   const user = await prisma.siswa.findMany({
+    where,
     select: {
       name: true,
       id: true,
