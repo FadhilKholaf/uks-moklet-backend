@@ -71,7 +71,7 @@ var GetAllRegister = function (req, res) { return __awaiter(void 0, void 0, void
                 semester = _a;
                 return [4 /*yield*/, (0, register_query_1.getAllRegister)({
                         tgl_periksa: semester
-                            ? { lte: semester.tgl_awal, gte: semester.tgl_akhir }
+                            ? { lte: semester.tgl_akhir, gte: semester.tgl_awal }
                             : undefined,
                     })];
             case 4:
