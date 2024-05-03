@@ -47,6 +47,7 @@ export const CreateDetailRegister = async (
   try {
     const data: Prisma.DetailRegisterUncheckedCreateInput = {
       ...req.body,
+      guru_id: req.token?.id || req.body.guru_id,
       id: uuidv7(),
     };
     const response = await createDetailRegister(data);

@@ -79,7 +79,7 @@ var setSemester = function (req, res) { return __awaiter(void 0, void 0, void 0,
                     secure: true,
                     sameSite: "none",
                 });
-                res.json((0, apiResponse_1.Success)("Login success", {
+                res.json((0, apiResponse_1.Success)("Sukses change semester", {
                     data: {
                         token: newJwt,
                     },

@@ -48,7 +48,7 @@ function findDetailRegisterById(id) {
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0: return [4 /*yield*/, prisma_1.default.detailRegister.findUnique({
-                        where: { id: id },
+                        where: { register_id: id },
                         include: { rujukan: true },
                     })];
                 case 1:

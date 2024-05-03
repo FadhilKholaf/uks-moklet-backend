@@ -29,7 +29,7 @@ export const setSemester = async (req: Request, res: Response) => {
   });
 
   res.json(
-    Success("Login success", {
+    Success("Sukses change semester", {
       data: {
         token: newJwt,
       },

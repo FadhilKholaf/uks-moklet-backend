@@ -4,10 +4,10 @@ import { Prisma } from "@prisma/client";
 // FIND DETAIL REGISTER BY ID
 export async function findDetailRegisterById(id: string) {
   const response = await prisma.detailRegister.findUnique({
-    where: { id },
+    where: { register_id: id },
     include: { rujukan: true },
   });
-  return response
+  return response;
 }
 
 // CREATE NEW DETAIL REGISTER

@@ -82,14 +82,15 @@ exports.FindDetailRegisterById = FindDetailRegisterById;
 // CREATE NEW DETAIL REGISTER
 var CreateDetailRegister = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var data, response, error_2;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
+    var _a;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
             case 0:
-                _a.trys.push([0, 2, , 3]);
-                data = __assign(__assign({}, req.body), { id: (0, uuidv7_1.uuidv7)() });
+                _b.trys.push([0, 2, , 3]);
+                data = __assign(__assign({}, req.body), { guru_id: ((_a = req.token) === null || _a === void 0 ? void 0 : _a.id) || req.body.guru_id, id: (0, uuidv7_1.uuidv7)() });
                 return [4 /*yield*/, (0, detail_register_query_1.createDetailRegister)(data)];
             case 1:
-                response = _a.sent();
+                response = _b.sent();
                 if (!response) {
                     return [2 /*return*/, res
                             .status(400)
@@ -99,7 +100,7 @@ var CreateDetailRegister = function (req, res) { return __awaiter(void 0, void 0
                         .status(200)
                         .json((0, apiResponse_1.CreatedSuccessfully)("Detail register created successfully", response))];
             case 2:
-                error_2 = _a.sent();
+                error_2 = _b.sent();
                 console.log(error_2);
                 res.status(500).json((0, apiResponse_1.InternalServerError)());
                 return [3 /*break*/, 3];
