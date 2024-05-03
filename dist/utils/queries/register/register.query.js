@@ -84,6 +84,7 @@ function getAllRegister(where) {
                 case 0: return [4 /*yield*/, prisma_1.default.register.findMany({
                         where: where,
                         include: {
+                            detail_register: { include: { guru: true } },
                             siswa: {
                                 select: {
                                     id: true,
