@@ -32,6 +32,7 @@ export async function getAllRegister(where?: Prisma.RegisterWhereInput) {
   const response = await prisma.register.findMany({
     where,
     include: {
+      detail_register: { include: { guru: true } },
       siswa: {
         select: {
           id: true,
