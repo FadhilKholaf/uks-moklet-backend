@@ -30,7 +30,7 @@ export const GetAllRegister = async (req: Request, res: Response) => {
       : undefined;
     const response = await getAllRegister({
       tgl_periksa: semester
-        ? { lte: semester.tgl_awal, gte: semester.tgl_akhir }
+        ? { lte: semester.tgl_akhir, gte: semester.tgl_awal }
         : undefined,
     });
 
