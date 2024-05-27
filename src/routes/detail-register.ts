@@ -19,7 +19,6 @@ var postDetailRegisterValidate = [
   check("tindakan", "tindakan is required").notEmpty(),
   check("evaluasi", "evaluasi is required").notEmpty(),
   check("lanjutan", "lanjutan is required").notEmpty(),
-  check("guru_id", "guru_id is required").notEmpty(),
   validateError,
 ];
 

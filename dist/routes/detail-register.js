@@ -14,7 +14,6 @@ var postDetailRegisterValidate = [
     (0, express_validator_1.check)("tindakan", "tindakan is required").notEmpty(),
     (0, express_validator_1.check)("evaluasi", "evaluasi is required").notEmpty(),
     (0, express_validator_1.check)("lanjutan", "lanjutan is required").notEmpty(),
-    (0, express_validator_1.check)("guru_id", "guru_id is required").notEmpty(),
     validateError_1.validateError,
 ];
 // MAIN ROUTER
